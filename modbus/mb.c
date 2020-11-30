@@ -129,6 +129,11 @@ eMBErrorCode
 eMBInit( eMBMode eMode, UCHAR ucSlaveAddress, UCHAR ucPort, ULONG ulBaudRate, eMBParity eParity )
 {
     eMBErrorCode    eStatus = MB_ENOERR;
+#if MB_RTU_ENABLED <= 0 && MB_ASCII_ENABLED <= 0
+    (void)ucPort;
+    (void)ulBaudRate;
+    (void)eParity;
+#endif
 
     /* check preconditions */
     if( ( ucSlaveAddress == MB_ADDRESS_BROADCAST ) ||
